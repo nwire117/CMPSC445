@@ -21,39 +21,48 @@ from tensorflow.keras import models
 from tensorflow.keras.layers import LSTM
 from sklearn.preprocessing import StandardScaler
 
-ticker = input("Enter ticker: ")
+def setTicker(t): 
+    ticker= t
+    print(ticker)
+    
+    url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' + ticker +'&outputsize=full&apikey=RCURB8MB4MUMOVQT&datatype=csv'
+    #names = ['date', 'open', 'high', 'low', 'close', 'volume']
+
+    df = pd.read_csv(url)
+
+    df = df.loc[::-1].reset_index(drop=True)
+    dfParsed = df[['timestamp', 'open', 'close']]
+
+    dfParsed['timestamp'] = pd.to_datetime(df['timestamp'])
+    extracted = dfParsed['timestamp']
+    dfParsed.set_index('timestamp', drop = True, inplace = True)
+
+    openPrice = dfParsed['open'].values
+    closePrice = dfParsed['close'].values
+    intradayChange = openPrice - closePrice
+    upDown = []
+
+    for i in range(len(intradayChange)):
+        if intradayChange[i] > 0:
+            upDown.append(1)
+        elif intradayChange[i] < 0:
+            upDown.append(-1)
+        else:
+            upDown.append(0)
 
 
-url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' + ticker +'&outputsize=full&apikey=RCURB8MB4MUMOVQT&datatype=csv'
-#names = ['date', 'open', 'high', 'low', 'close', 'volume']
+    dfUpDown = pd.DataFrame(upDown, columns = ['Up/Down'])
+    dfUpDown.insert(0, 'Date', extracted)
+    dfUpDown.set_index('Date', drop = True, inplace = True)
 
-df = pd.read_csv(url)
+    scaler = MinMaxScaler(feature_range=(0, 1))
+    dfUpDownMMS = scaler.fit_transform(dfUpDown)
+    dfUpDownStandard = StandardScaler().fit_transform(dfUpDown)
+    
+def train():
+    
+    return "#RockyMusic"
 
-df = df.loc[::-1].reset_index(drop=True)
-dfParsed = df[['timestamp', 'open', 'close']]
-
-dfParsed['timestamp'] = pd.to_datetime(df['timestamp'])
-extracted = dfParsed['timestamp']
-dfParsed.set_index('timestamp', drop = True, inplace = True)
-
-openPrice = dfParsed['open'].values
-closePrice = dfParsed['close'].values
-intradayChange = openPrice - closePrice
-upDown = []
-
-for i in range(len(intradayChange)):
-    if intradayChange[i] > 0:
-        upDown.append(1)
-    elif intradayChange[i] < 0:
-        upDown.append(-1)
-    else:
-        upDown.append(0)
-
-
-dfUpDown = pd.DataFrame(upDown, columns = ['Up/Down'])
-dfUpDown.insert(0, 'Date', extracted)
-dfUpDown.set_index('Date', drop = True, inplace = True)
-
-scaler = MinMaxScaler(feature_range=(0, 1))
-dfUpDownMMS = scaler.fit_transform(dfUpDown)
-dfUpDownStandard = StandardScaler().fit_transform(dfUpDown)
+def prediction():
+    
+    return "prediction complete"

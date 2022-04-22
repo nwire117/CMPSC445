@@ -67,5 +67,5 @@ function setTicker(){
 
     runPrediction();
 
-    // testing local host updates 
+    // WHYYYYY NO CSS
 }

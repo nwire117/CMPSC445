@@ -1,7 +1,10 @@
 import standardizedData
 # import Flask
-from flask import Flask, send_from_directory, request, json
+from flask import Flask, send_from_directory, request, json, render_template
 from flask_cors import CORS
+from PIL import Image
+import base64
+import io
 app = Flask(__name__)
 CORS(app)
 
@@ -38,7 +41,6 @@ def result():
     resultString = json.dumps(result)
 
     return resultString
-
 # Endpoint tick
 @app.route('/tick', methods=["POST"])
 def set_ticker():

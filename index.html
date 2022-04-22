@@ -6,12 +6,13 @@
     <title>ToDaMOON</title>
 </head>
 <body class = "body">
-    <link rel="stylesheet" href="index.css" type="text/css">
+    <link rel="stylesheet" href="{{for_url('static', filename='index.css')}}">
 <script src="main.js"></script>
 <h1>STONKS</h1>
 <input type="text" id = "ticker">
 <button onclick="setTicker()">Get Prediction</button>
-<div id="graph"></div>
+<div id="graph">
+</div>
 <div id ="accuracy"></div>
 <div id ="trend"></div>
 </body>

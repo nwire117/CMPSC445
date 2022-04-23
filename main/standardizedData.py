@@ -43,12 +43,6 @@ def setTicker(t):
     df = df.set_index('date')
     df = df.iloc[::-1]
 
-    cancan = io.BytesIO()
-
-    mpf.plot(df['2022-04'], type='candle', volume=True, tight_layout = True, title= ticker + ' price', style='yahoo', savefig =cancan)
     
-    cancan.seek(0)
-    import base64
-    candle_png = base64.b64encode(cancan.getvalue())
+    mpf.plot(df['2022-04'], type='candle', volume=True, tight_layout = True, title= ticker + ' price', style='yahoo', savefig ='graph.png')
     
-    return candle_png

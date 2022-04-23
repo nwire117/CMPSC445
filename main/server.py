@@ -44,8 +44,7 @@ def set_ticker():
     
     # From the dictionary get the value
     ticker = receivedDict["ticker"]
-    candle= standardizedData.setTicker(ticker)
-    get_graph(candle)
+    standardizedData.setTicker(ticker)
 
     # make a dictionary from the result
     # in this example, the server always replies whatever the client sent + 1
@@ -57,8 +56,6 @@ def set_ticker():
     return resultString
 
 
-def get_graph(g):
-    return render_template("index.html", results = g)
 
 # Run the server
 if __name__ == '__main__':

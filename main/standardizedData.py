@@ -34,10 +34,9 @@ def prediction():
 def setTicker(t): 
     ticker= t
     
-    url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' + ticker +'&outputsize=full&apikey=RCURB8MB4MUMOVQT&datatype=csv'
-    #names = ['date', 'open', 'high', 'low', 'close', 'volume']
-
-    df = pd.read_csv(url)
+    url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' + ticker +'&outputsize=full&apikey=58O211IRNVWF6FTD&datatype=csv'
+    names = ['date', 'open', 'high', 'low', 'close', 'volume']
+    df = pd.read_csv(url, names=names, skiprows=1)
 
     df.date= pd.to_datetime(df.date)
 
@@ -45,35 +44,11 @@ def setTicker(t):
     df = df.iloc[::-1]
 
     cancan = io.BytesIO()
-    dfParsed = df[['timestamp', 'open', 'close']]
 
-    dfParsed['timestamp'] = pd.to_datetime(df['timestamp'])
-    extracted = dfParsed['timestamp']
-    dfParsed.set_index('timestamp', drop = True, inplace = True)
-
-    openPrice = dfParsed['open'].values
-    closePrice = dfParsed['close'].values
-    intradayChange = openPrice - closePrice
-    upDown = []
-
-    for i in range(len(intradayChange)):
-        if intradayChange[i] > 0:
-            upDown.append(1)
-        elif intradayChange[i] < 0:
-            upDown.append(-1)
-        else:
-            upDown.append(0)
-
-
-    dfUpDown = pd.DataFrame(upDown, columns = ['Up/Down'])
-    dfUpDown.insert(0, 'Date', extracted)
-    dfUpDown.set_index('Date', drop = True, inplace = True)
-
-    scaler = MinMaxScaler(feature_range=(0, 1))
-    dfUpDownMMS = scaler.fit_transform(dfUpDown)
-    dfUpDownStandard = StandardScaler().fit_transform(dfUpDown)
+    mpf.plot(df['2022-04'], type='candle', volume=True, tight_layout = True, title= ticker + ' price', style='yahoo', savefig =cancan)
     
-
-    mpf.plot(df['2022-04'], type='candle', volume=True, tight_layout = True, title= ticker + ' price', style='yahoo', savefig = cancan)
+    cancan.seek(0)
+    import base64
+    candle_png = base64.b64encode(cancan.getvalue())
     
-    return cancan
+    return candle_png

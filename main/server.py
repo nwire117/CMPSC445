@@ -44,7 +44,7 @@ def set_ticker():
     
     # From the dictionary get the value
     ticker = receivedDict["ticker"]
-    candle = standardizedData.setTicker(ticker)
+    candle= standardizedData.setTicker(ticker)
     get_graph(candle)
 
     # make a dictionary from the result
@@ -58,7 +58,7 @@ def set_ticker():
 
 @app.route('/graph', methods=["GET"])
 def get_graph(g):
-    return render_template("index.html", user_image = g)
+    return render_template("index.html", results = g)
 
 # Run the server
 if __name__ == '__main__':

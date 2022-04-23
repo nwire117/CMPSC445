@@ -65,10 +65,13 @@ function setTicker(){
         }
     };
 
-    // Send request
+    // Send request 
     http.send(payloadJSON);
 
     runPrediction();
+    const image = document.createElement('img')
+    image.src  = 'static/graph.png'
+    document.getElementById("graph").appendChild(image)
 }
 
 document.addEventListener("DOMContentLoaded", function(event) {

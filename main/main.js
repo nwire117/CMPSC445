@@ -30,7 +30,7 @@ http.send();
 
 
 function setTicker(){
-    
+    document.getElementById("graph").innerHTML = ""
     var url = "http://localhost:8000";   // The URL and the port number must match server-side
     var endpoint = "/tick";            // Endpoint must match server endpoint
 
@@ -69,9 +69,15 @@ function setTicker(){
     http.send(payloadJSON);
 
     runPrediction();
+
     const image = document.createElement('img')
-    image.src  = 'graph.png'
+    image.src  = 'main\graph.png'
     document.getElementById("graph").appendChild(image)
+
 }
 
-
+document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll('img').forEach(function(img){
+       img.onerror = function(){this.style.display='none';};
+    })
+ });

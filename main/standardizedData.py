@@ -46,3 +46,4 @@ def setTicker(t):
     
     mpf.plot(df['2022-04'], type='candle', volume=True, tight_layout = True, title= ticker + ' price', style='yahoo', savefig ='graph.png')
     
+    

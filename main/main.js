@@ -69,10 +69,9 @@ function setTicker(){
     http.send(payloadJSON);
 
     runPrediction();
+    const image = document.createElement('img')
+    image.src  = 'static/graph.png'
+    document.getElementById("graph").appendChild(image)
 }
 
-document.addEventListener("DOMContentLoaded", function(event) {
-    document.querySelectorAll('img').forEach(function(img){
-       img.onerror = function(){this.style.display='none';};
-    })
- });
+

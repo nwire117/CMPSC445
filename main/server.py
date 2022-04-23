@@ -56,7 +56,7 @@ def set_ticker():
 
     return resultString
 
-@app.route('/graph', methods=["GET"])
+
 def get_graph(g):
     return render_template("index.html", results = g)
 

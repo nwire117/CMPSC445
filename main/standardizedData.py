@@ -31,7 +31,6 @@ def prediction():
 
 def setTicker(t): 
     ticker= t
-    print(ticker)
     
     url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' + ticker +'&outputsize=full&apikey=RCURB8MB4MUMOVQT&datatype=csv'
     #names = ['date', 'open', 'high', 'low', 'close', 'volume']

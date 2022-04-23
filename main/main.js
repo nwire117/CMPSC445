@@ -40,6 +40,7 @@ function setTicker(){
     console.log(ticker);
     var payloadObj = { "ticker" : ticker };
     var payloadJSON = JSON.stringify(payloadObj);
+    console.log(payloadJSON);
 
 
     // prepare POST request
@@ -53,11 +54,13 @@ function setTicker(){
 
             // JSON string
             var replyString = http.responseText;
+            console.log(replyString);
 
             // convert JSON string into JavaScript object
             var obj = JSON.parse(replyString);
 
             document.getElementById("accuracy").innerHTML = obj["ticker"];
+           console.log(obj);
 
         }
     };
@@ -66,6 +69,4 @@ function setTicker(){
     http.send(payloadJSON);
 
     runPrediction();
-
-    // WHYYYYY NO CSS
 }

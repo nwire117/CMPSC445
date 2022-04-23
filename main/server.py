@@ -1,4 +1,4 @@
-import standardizedData as standardizedData
+import standardizedData
 # import Flask
 from flask import Flask, send_from_directory, request, json, render_template
 from flask_cors import CORS
@@ -44,6 +44,7 @@ def set_ticker():
     
     # From the dictionary get the value
     ticker = receivedDict["ticker"]
+    print("hi mom")
     standardizedData.setTicker(ticker)
 
     # make a dictionary from the result

@@ -21,6 +21,14 @@ from tensorflow.keras import models
 from tensorflow.keras.layers import LSTM
 from sklearn.preprocessing import StandardScaler
 
+def train():
+    
+    return "#RockyMusic"
+
+def prediction():
+    
+    return "prediction complete"
+
 def setTicker(t): 
     ticker= t
     print(ticker)
@@ -59,10 +67,3 @@ def setTicker(t):
     dfUpDownMMS = scaler.fit_transform(dfUpDown)
     dfUpDownStandard = StandardScaler().fit_transform(dfUpDown)
     
-def train():
-    
-    return "#RockyMusic"
-
-def prediction():
-    
-    return "prediction complete"

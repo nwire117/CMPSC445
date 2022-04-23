@@ -37,7 +37,7 @@ function setTicker(){
     var http = new XMLHttpRequest();
 
     ticker = document.getElementById("ticker").value;
-
+    console.log(ticker);
     var payloadObj = { "ticker" : ticker };
     var payloadJSON = JSON.stringify(payloadObj);
 

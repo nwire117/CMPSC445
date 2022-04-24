@@ -6,6 +6,7 @@ from PIL import Image
 import base64
 import io
 app = Flask(__name__)
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 CORS(app)
 
 

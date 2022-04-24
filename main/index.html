@@ -5,16 +5,23 @@
     <link rel="stylesheet" href="static/index.css" type="text/css">
     <link rel="shortcut icon" href="#" />
     <title>ToDaMOON</title>
+
 </head>
 <body class = "body">
 <script src="main.js"></script>
 <h1>CMPSC 445 Stock Prediction</h1>
 <input type="text" id = "ticker">
-<button onclick="setTicker()">Get Prediction</button>
-<div id="graph">
-    <img src="/graph.png" alt="Candle Stick Graph">
+<button onclick="setTicker()">Set Ticker</button>
+<div>
+    <img id="graph" src="" />
 </div>
+
+<button type = "button" onclick="showGraph()" id="btnID">
+    Get Graph
+</button>
+
 <div id ="accuracy"></div>
 <div id ="trend"></div>
 </body>
 </html>
+

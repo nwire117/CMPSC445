@@ -44,6 +44,6 @@ def setTicker(t):
     df = df.iloc[::-1]
 
     
-    mpf.plot(df['2022-04'], type='candle', volume=True, tight_layout = True, title= ticker + ' price', style='yahoo', savefig ='graph.png')
+    mpf.plot(df['2022-04'], type='candle', volume=True, tight_layout = True, title= ticker + ' price', style='yahoo', savefig ='static/graph.png')
     
     

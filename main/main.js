@@ -1,11 +1,13 @@
 function runPrediction() {
 
-    var url = "http://localhost:8000";  
+    var url = "http://localhost:8000";
     var endpoint = "/result";           
     
     var http = new XMLHttpRequest();
     // prepare GET request
     http.open("GET", url+endpoint, true);
+
+
 
 http.onreadystatechange = function() {
     var DONE = 4;       // 4 means the request is done.
@@ -29,8 +31,8 @@ http.send();
 }
 
 
-function setTicker(){
-    document.getElementById("graph").innerHTML = ""
+function setTicker() {
+    //document.getElementById("graph").innerHTML = ""
     var url = "http://localhost:8000";   // The URL and the port number must match server-side
     var endpoint = "/tick";            // Endpoint must match server endpoint
 
@@ -38,16 +40,16 @@ function setTicker(){
 
     ticker = document.getElementById("ticker").value;
     console.log(ticker);
-    var payloadObj = { "ticker" : ticker };
+    var payloadObj = {"ticker": ticker};
     var payloadJSON = JSON.stringify(payloadObj);
     console.log(payloadJSON);
 
 
     // prepare POST request
-    http.open("POST", url+endpoint, true);
+    http.open("POST", url + endpoint, true);
     http.setRequestHeader("Content-Type", "application/json");
 
-    http.onreadystatechange = function() {
+    http.onreadystatechange = function () {
         var DONE = 4;       // 4 means the request is done.
         var OK = 200;       // 200 means a successful return.
         if (http.readyState == DONE && http.status == OK && http.responseText) {
@@ -60,7 +62,7 @@ function setTicker(){
             var obj = JSON.parse(replyString);
 
             document.getElementById("accuracy").innerHTML = obj["ticker"];
-           console.log(obj);
+            console.log(obj);
 
         }
     };
@@ -70,14 +72,23 @@ function setTicker(){
 
     runPrediction();
 
-    const image = document.createElement('img')
-    image.src  = 'main\graph.png'
-    document.getElementById("graph").appendChild(image)
 
 }
 
-document.addEventListener("DOMContentLoaded", function(event) {
-    document.querySelectorAll('img').forEach(function(img){
-       img.onerror = function(){this.style.display='none';};
-    })
- });
+function showGraph(){
+    let image = document.getElementById("graph");
+    image.src  = "static/graph.png"
+    document.getElementById("btnID").style.display = "none";
+
+}
+
+
+
+
+
+
+// document.addEventListener("DOMContentLoaded", function(event) {
+//     document.querySelectorAll('img').forEach(function(img){
+//        img.onerror = function(){this.style.display='none';};
+//     })
+//  });

@@ -68,7 +68,10 @@ function setTicker(){
     // Send request
     http.send(payloadJSON);
 
-    runPrediction();
+      
+    let image = document.getElementById("graph");
+    image.src  = "static/graph.png"
+    
 }
 
 document.addEventListener("DOMContentLoaded", function(event) {

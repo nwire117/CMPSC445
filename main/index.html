@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +12,8 @@
 <h1>CMPSC 445 Stock Prediction</h1>
 <input type="text" id = "ticker">
 <button onclick="setTicker()">Get Prediction</button>
-<div id="graph" methos = "GET" action = "/graph">
+<div id="graph">
+    <img id="graph" src="/static/graph.png" />
 </div>
 <div id ="accuracy"></div>
 <div id ="trend"></div>

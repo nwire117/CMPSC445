@@ -1,10 +1,20 @@
-import standardizedData
+import ltsm
 # import Flask
 from flask import Flask, send_from_directory, request, json, render_template
 from flask_cors import CORS
 from PIL import Image
-import base64
-import io
+import numpy
+import pandas as pd
+import matplotlib.pyplot as plt
+from pandas import read_csv
+import math
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.layers import LSTM
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.metrics import mean_squared_error
+
+
 app = Flask(__name__)
 CORS(app)
 
@@ -35,6 +45,7 @@ def result():
     resultString = json.dumps(result)
 
     return resultString
+
 # Endpoint tick
 @app.route('/tick', methods=["POST"])
 def set_ticker():
@@ -44,28 +55,20 @@ def set_ticker():
     
     # From the dictionary get the value
     ticker = receivedDict["ticker"]
-    candle = standardizedData.setTicker(ticker)
-    get_graph(candle)
+    ltsm.setTicker(ticker)
 
     # make a dictionary from the result
     # in this example, the server always replies whatever the client sent + 1
     resultDict = { "ticker": ticker }
-    
+  
     # convert dictionary to JSON string
     resultString = json.dumps(resultDict)
 
     return resultString
 
-@app.route('/graph', methods=["GET"])
-def get_graph(g):
-    return render_template("index.html", user_image = g)
+
 
 # Run the server
 if __name__ == '__main__':
-    
-    # train the model
-    test =standardizedData.train()
-    print(test)
-    
     # start the server
     app.run(port = 8000)

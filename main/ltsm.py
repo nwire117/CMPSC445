@@ -24,6 +24,7 @@ def setTicker(t):
     df = pd.read_csv(url, names=names, skiprows=1)   
     saved_df = df
     df = df.iloc[::-1]
+    df = df.set_index('date')
     data=df.filter(['close'])
     dataset = data.values
 
@@ -56,7 +57,7 @@ def setTicker(t):
 
     # Compile and fit the model
     model.compile(loss='mean_squared_error', optimizer='adam')
-    model.fit(trainX, trainY, epochs=4, batch_size=1)
+    model.fit(trainX, trainY, epochs=1, batch_size=1)
 
 
     test = ds[train_size-60:, :]
@@ -87,6 +88,9 @@ def setTicker(t):
     valid['Predictions'] = testPredict
     print(valid)
 
+    newest= len(data)
+    print(newest)
+    start = newest-30
     
    # show data 
     plt.figure(figsize=(16,8))
@@ -95,6 +99,9 @@ def setTicker(t):
     plt.ylabel("Close price", fontsize = 18)
     plt.plot(train['close'])
     plt.plot(valid[['close', 'Predictions']])
+    plt.xlim(start, newest)
+    plt.xticks( numpy.arange(start, newest, 2))
+    plt.xticks(rotation = 45)
     plt.legend(['Train', 'Val', 'Predictions'], loc = 'lower right')
     plt.savefig("static/graph.png")
     

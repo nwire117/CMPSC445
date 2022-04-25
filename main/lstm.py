@@ -94,7 +94,7 @@ def setTicker(t):
     
    # show data 
     plt.figure(figsize=(16,8))
-    plt.title("LTSM")
+    plt.title("LSTM")
     plt.xlabel('Date', fontsize = 18)
     plt.ylabel("Close price", fontsize = 18)
     plt.plot(train['close'])

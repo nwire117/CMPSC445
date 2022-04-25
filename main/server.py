@@ -1,4 +1,4 @@
-import ltsm
+import lstm
 # import Flask
 from flask import Flask, send_from_directory, request, json, render_template
 from flask_cors import CORS
@@ -55,7 +55,7 @@ def set_ticker():
     
     # From the dictionary get the value
     ticker = receivedDict["ticker"]
-    ltsm.setTicker(ticker)
+    lstm.setTicker(ticker)
 
     # make a dictionary from the result
     # in this example, the server always replies whatever the client sent + 1

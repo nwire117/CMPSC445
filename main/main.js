@@ -59,7 +59,7 @@ function setTicker(){
             // convert JSON string into JavaScript object
             var obj = JSON.parse(replyString);
 
-            document.getElementById("accuracy").innerHTML = obj["ticker"].toUpperCase() + " Prediction Graph";
+            document.getElementById("title").innerHTML = obj["ticker"].toUpperCase() + " Prediction Graph";
            console.log(obj);
 
         }

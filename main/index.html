@@ -1,20 +1,26 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="static/index.css" type="text/css">
-    <!--<link rel="stylesheet" href="index.css" type="text/css"> NOT WORKING-->
     <link rel="shortcut icon" href="#" />
     <title>ToDaMOON</title>
 </head>
 <body class = "body">
 <script src="main.js"></script>
-<h1>STONKS</h1>
+<h1>CMPSC 445 Stock Prediction</h1>
 <input type="text" id = "ticker">
-<button onclick="setTicker()">Get Prediction</button>
-<div id="graph">
+<button onclick="setTicker()" id="button">Get Prediction</button>
+<br><br>
+<div id ="title"></div>
+<div id="g">
+    <br><br>
+    <img id="graph" src="" />
 </div>
-<div id ="accuracy"></div>
+<button type = "button" onclick="showGraph()" id="btnID">
+    Get Graph
+</button>
 <div id ="trend"></div>
 </body>
 </html>

@@ -37,9 +37,10 @@ function setTicker(){
     var http = new XMLHttpRequest();
 
     ticker = document.getElementById("ticker").value;
-
+    console.log(ticker);
     var payloadObj = { "ticker" : ticker };
     var payloadJSON = JSON.stringify(payloadObj);
+    console.log(payloadJSON);
 
 
     // prepare POST request
@@ -53,11 +54,13 @@ function setTicker(){
 
             // JSON string
             var replyString = http.responseText;
+            console.log(replyString);
 
             // convert JSON string into JavaScript object
             var obj = JSON.parse(replyString);
 
-            document.getElementById("accuracy").innerHTML = obj["ticker"];
+            document.getElementById("title").innerHTML = obj["ticker"].toUpperCase() + " Prediction Graph";
+           console.log(obj);
 
         }
     };
@@ -65,7 +68,33 @@ function setTicker(){
     // Send request
     http.send(payloadJSON);
 
-    runPrediction();
 
-    // WHYYYYY NO CSS
+    
+}
+
+document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll('img').forEach(function(img){
+       img.onerror = function(){this.style.display='none';};
+    })
+ });
+
+ // Get the input field
+var input = document.getElementById("ticker");
+
+// Execute a function when the user releases a key on the keyboard
+document.addEventListener("keyup", function(event) {
+  // Number 13 is the "Enter" key on the keyboard
+  if (event.keyCode === 13) {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    // Trigger the button element with a click
+    document.getElementById("button").click();
+  }
+});
+
+function showGraph(){
+    let image = document.getElementById("graph");
+    image.src  = "static/graph.png"
+    document.getElementById("btnID").style.display = "none";
+
 }

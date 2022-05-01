@@ -20,17 +20,31 @@ from tensorflow.keras import layers
 from tensorflow.keras import models
 from tensorflow.keras.layers import LSTM
 from sklearn.preprocessing import StandardScaler
+import io
+import mplfinance as mpf
+
+def train():
+    
+    return "#RockyMusic"
+
+def prediction():
+    
+    return "prediction complete"
 
 def setTicker(t): 
     ticker= t
-    print(ticker)
     
     url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' + ticker +'&outputsize=full&apikey=RCURB8MB4MUMOVQT&datatype=csv'
     #names = ['date', 'open', 'high', 'low', 'close', 'volume']
 
     df = pd.read_csv(url)
 
-    df = df.loc[::-1].reset_index(drop=True)
+    df.date= pd.to_datetime(df.date)
+
+    df = df.set_index('date')
+    df = df.iloc[::-1]
+
+    cancan = io.BytesIO()
     dfParsed = df[['timestamp', 'open', 'close']]
 
     dfParsed['timestamp'] = pd.to_datetime(df['timestamp'])
@@ -59,10 +73,7 @@ def setTicker(t):
     dfUpDownMMS = scaler.fit_transform(dfUpDown)
     dfUpDownStandard = StandardScaler().fit_transform(dfUpDown)
     
-def train():
-    
-    return "#RockyMusic"
 
-def prediction():
+    mpf.plot(df['2022-04'], type='candle', volume=True, tight_layout = True, title= ticker + ' price', style='yahoo', savefig = cancan)
     
-    return "prediction complete"
+    return cancan

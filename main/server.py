@@ -1,4 +1,4 @@
-import lstm
+import lstm as lstm
 # import Flask
 from flask import Flask, send_from_directory, request, json, render_template
 from flask_cors import CORS

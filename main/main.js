@@ -1,5 +1,5 @@
 function setTicker(){
-    
+
     var url = "http://localhost:8000";   // The URL and the port number must match server-side
     var endpoint = "/tick";            // Endpoint must match server endpoint
 
@@ -20,22 +20,21 @@ function setTicker(){
         var DONE = 4;       // 4 means the request is done.
         var OK = 200;       // 200 means a successful return.
         if (http.readyState == DONE && http.status == OK && http.responseText) {
-
             // JSON string
             var replyString = http.responseText;
             console.log(replyString);
 
             // convert JSON string into JavaScript object
             var obj = JSON.parse(replyString);
-
             document.getElementById("title").innerHTML = obj["ticker"].toUpperCase() + " Prediction Graph";
-           console.log(obj);
-
+            refreshGraph();
+            console.log(obj);
         }
     };
 
     // Send request
     http.send(payloadJSON);
+   
 }
 
 // hides broken image icon if shown on startup 
@@ -59,9 +58,10 @@ document.addEventListener("keyup", function(event) {
   }
 });
 
-function showGraph(){
+function refreshGraph(){
+    var timestamp = new Date().getTime();  
+    var queryString = "?t=" + timestamp; 
     let image = document.getElementById("graph");
-    image.src  = "static/graph.png"
+    image.src  = "static/graph.png" + queryString; 
     document.getElementById("btnID").style.display = "none";
-
 }

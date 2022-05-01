@@ -1,5 +1,11 @@
-function setTicker(){
+// shows loading wheel 
+function load(){
+    document.querySelector('.loader').classList.toggle('show' );
+    setTicker();
+}
 
+// sends ticker to lstm.py to grab data, train model, and save graph prediction png 
+function setTicker(){
     var url = "http://localhost:8000";   // The URL and the port number must match server-side
     var endpoint = "/tick";            // Endpoint must match server endpoint
 
@@ -26,15 +32,22 @@ function setTicker(){
 
             // convert JSON string into JavaScript object
             var obj = JSON.parse(replyString);
+            document.querySelector('.loader').classList.toggle('show' );
             document.getElementById("title").innerHTML = obj["ticker"].toUpperCase() + " Prediction Graph";
             refreshGraph();
             console.log(obj);
         }
-    };
+    };async function hideLoad(){
+        await setTicker();
+        //document.querySelector('.loader').classList.toggle('show' );
+    }async function hideLoad(){
+        await setTicker();
+        //document.querySelector('.loader').classList.toggle('show' );
+    }
+
 
     // Send request
     http.send(payloadJSON);
-   
 }
 
 // hides broken image icon if shown on startup 
@@ -58,6 +71,7 @@ document.addEventListener("keyup", function(event) {
   }
 });
 
+// places graph png onto site
 function refreshGraph(){
     var timestamp = new Date().getTime();  
     var queryString = "?t=" + timestamp; 
@@ -65,3 +79,4 @@ function refreshGraph(){
     image.src  = "static/graph.png" + queryString; 
     document.getElementById("btnID").style.display = "none";
 }
+

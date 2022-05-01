@@ -106,7 +106,7 @@ def setTicker(t):
     print('Test Score: %.2f RMSE' % (testScore))
      
        
-        #plot data
+    #plot data
     train = data[:train_size]
     valid= data[train_size:]
     valid['Predictions'] = testPredict

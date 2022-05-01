@@ -19,7 +19,7 @@ numpy.random.seed(7)
     
 def setTicker(t): 
     ticker = t
-        
+       
     url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' + ticker +'&outputsize=full&apikey=58O211IRNVWF6FTD&datatype=csv'
     names = ['date', 'open', 'high', 'low', 'close', 'volume']
     df = pd.read_csv(url, names=names, skiprows=1)   
@@ -29,13 +29,13 @@ def setTicker(t):
     #df['date'] = df['date'].dt.date
     
     df = df.set_index('date')
-    
+  
     data=df.filter(['close'])
     dataset = data.values
     
         # split into train and test sets
     train_size = math.ceil(len(dataset)*.4)
-    
+        
     
         # normalize the dataset
     scaler = MinMaxScaler(feature_range=(0, 1)) 
@@ -119,18 +119,19 @@ def setTicker(t):
     print(newest)
     start = newest-30
         
-       # show data 
+    # show data 
     plt.figure(figsize=(16,8))
     plt.title("LSTM")
     plt.xlabel('Date', fontsize = 18)
     plt.ylabel("Close price", fontsize = 18)
     plt.plot(train['close'])
-    plt.plot(valid[['close', 'Predictions']])
-    plt.plot(df_proj['Future Prediction'])
+    val, = plt.plot(valid['close'], 'b', label = 'Val')
+    pred, = plt.plot(valid['Predictions'], 'm', label = 'Predictions')
+    f_pred, = plt.plot(df_proj['Future Prediction'], 'g', label = 'Future Predictions')
     plt.xlim(start, newest)
     plt.xticks( numpy.arange(start, newest, 2))
     plt.xticks(rotation = 45)
-    plt.legend(['Train', 'Val', 'Predictions', 'Future Prediction'], loc = 'lower right')
+    plt.legend([val, pred, f_pred], ['Val', 'Prediction', 'Future Predictions'], loc = 'upper right')
     plt.savefig("static/graph.png")
 
     

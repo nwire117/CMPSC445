@@ -15,7 +15,12 @@ button:hover{
 input{
     background-color: grey;
     color: white; 
-    font-family: sans-serif; 
+    font-family: sans-serif;
+    text-transform: uppercase;
+}
+
+::placeholder{
+    color: lawngreen;
 }
 
 h1{

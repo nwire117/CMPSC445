@@ -1,34 +1,3 @@
-function runPrediction() {
-
-    var url = "http://localhost:8000";  
-    var endpoint = "/result";           
-    
-    var http = new XMLHttpRequest();
-    // prepare GET request
-    http.open("GET", url+endpoint, true);
-
-http.onreadystatechange = function() {
-    var DONE = 4;       // 4 means the request is done.
-    var OK = 200;       // 200 means a successful return.
-    if (http.readyState == DONE && http.status == OK && http.responseText) {
-
-        // JSON string
-        var replyString = http.responseText;
-
-        var reply = JSON.parse(replyString);
-
-        document.getElementById("trend").innerHTML = "JSON received: " + reply;
-        // convert JSON string into JavaScript object and get the scores
-
-
-    }
-};
-
-// Send request
-http.send();
-}
-
-
 function setTicker(){
     
     var url = "http://localhost:8000";   // The URL and the port number must match server-side
@@ -67,11 +36,9 @@ function setTicker(){
 
     // Send request
     http.send(payloadJSON);
-
-
-    
 }
 
+// hides broken image icon if shown on startup 
 document.addEventListener("DOMContentLoaded", function(event) {
     document.querySelectorAll('img').forEach(function(img){
        img.onerror = function(){this.style.display='none';};

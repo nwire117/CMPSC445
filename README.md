@@ -2,7 +2,7 @@
 
 Please see the following instructions on how to get the project up and running.
 
-1) Download and install anaconda if you don't have it
+1) Download and install anaconda from https://www.anaconda.com/
 2) Launch Spyder
 3) Open this project
 4) Run server.py

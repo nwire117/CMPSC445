@@ -37,14 +37,7 @@ function setTicker(){
             refreshGraph();
             console.log(obj);
         }
-    };async function hideLoad(){
-        await setTicker();
-        //document.querySelector('.loader').classList.toggle('show' );
-    }async function hideLoad(){
-        await setTicker();
-        //document.querySelector('.loader').classList.toggle('show' );
-    }
-
+    };
 
     // Send request
     http.send(payloadJSON);
@@ -56,9 +49,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
        img.onerror = function(){this.style.display='none';};
     })
  });
-
- // Get the input field
-var input = document.getElementById("ticker");
 
 // Execute a function when the user releases a key on the keyboard
 document.addEventListener("keyup", function(event) {

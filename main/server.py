@@ -2,17 +2,7 @@ import lstm as lstm
 # import Flask
 from flask import Flask, send_from_directory, request, json, render_template
 from flask_cors import CORS
-from PIL import Image
-import numpy
-import pandas as pd
-import matplotlib.pyplot as plt
-from pandas import read_csv
-import math
-from keras.models import Sequential
-from keras.layers import Dense
-from keras.layers import LSTM
-from sklearn.preprocessing import MinMaxScaler
-from sklearn.metrics import mean_squared_error
+
 
 app = Flask(__name__)
 CORS(app)

@@ -8,14 +8,11 @@ from keras.layers import Dense
 from keras.layers import LSTM
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error
-import mplfinance as mpf
 from pandas.tseries.offsets import DateOffset
 
 
 # fix random seed for reproducibility
-numpy.random.seed(7)
-
-
+#numpy.random.seed(7)
     
 def setTicker(t): 
     ticker = t
